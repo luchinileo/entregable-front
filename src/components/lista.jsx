@@ -12,7 +12,18 @@ const Lista = () => {
         console.log('no se pudo obtener las personas',error)
      });
    
-   }, []);
+   }, [personas]);
+
+   const agregarPersona= ( )=>{
+    const data={nombre:"juan" , apellido:"luchini", nacionalidad:"ARGENTINO"}
+    fetch('http://localhost:3001/lista',{method:'POST',headers:{'Content-Type': 'application/json'},body:JSON.stringify(data)})
+    .then(resp => resp.json())
+    .then(data => setpersonas([...personas,{data}]))
+    .catch(error =>{
+       console.log('no se pudo obtener las personas',error)
+    });
+
+   }
 
 
     return (
@@ -25,6 +36,7 @@ const Lista = () => {
                 <li key={index}>{persona.nombre} - {persona.apellido} - {persona.nacionalidad}</li>
                 ))}
         </ul>
+        <button className="" onClick={agregarPersona}>agregar personas</button>
         </div>
         </>
     )
