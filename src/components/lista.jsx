@@ -1,4 +1,5 @@
 import React, {useState , useEffect} from "react";
+import axios from 'axios'
 
 
 const Lista = () => {
@@ -26,16 +27,6 @@ const Lista = () => {
         
     }
 
-
-
-
-
-
-
-
-
-
-
     const [nuevaPersona, setNuevaPersona] = useState({
         nombre:"",
         apellido:"",
@@ -48,17 +39,27 @@ const Lista = () => {
             [event.target.name]:event.target.value,
             [event.target.name]:event.target.value,
             [event.target.name]:event.target.value
-        })
-       
-       
+        })   
      }
   
   
+     const enviarDatosApi= async (datos)=>{
+         const resultado =await axios.post('http://localhost:3001/lista',datos)
+         console.log(resultado)
+     }
+
     const enviarDatos = (event) =>{
         event.preventDefault()
         console.log(nuevaPersona)
+
+
+         enviarDatosApi(nuevaPersona)
       
     }
+
+
+
+
 
     return (
         <div className="container-list">
